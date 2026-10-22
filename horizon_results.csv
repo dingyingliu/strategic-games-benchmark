@@ -1,0 +1,6 @@
+planning_depth,flip_rate_number,flip_rate_action,pick_regret_number_pts,pick_regret_action_pts,h2h_loss_vs_equilibrium_pts_per_game,exploitability_pts_per_game
+uniform_random,,,,,,26.4986
+1,0.4836,0.097,0.1182,0.4607,2.7333,23.9799
+2,0.5284,0.044,0.0941,0.1521,1.5137,22.937
+3,0.5489,0.0194,0.06,0.0463,1.1507,
+full,0,0,0,0,0,0

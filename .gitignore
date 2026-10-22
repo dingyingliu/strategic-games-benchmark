@@ -1,0 +1,17 @@
+# Compiled solver and the value tables it writes (about 243 MB each)
+/simple_oracle
+*.bin
+
+# Keys and private notes
+.env
+.env.*
+CLAUDE.md
+*discussion*.md
+*_private.md
+notes/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,33 @@
+metric,value,note
+states,30380185,"full 10-round game, exact backward induction"
+solve_LPs,817651685,
+solve_seconds_single_core,118.0,2.1 GHz core
+root_value,4.441e-16,symmetric game; must be 0
+max_antisymmetry_violation,1.329e-12,
+LP_BR_violations,0,of 817.65M solves
+BR_vs_equilibrium_pts_per_game,1.257e-14,end-to-end check; must be ~0
+stage_states_rb_pairs,100,
+stage_pure_saddle_states,0,no pure Nash anywhere
+stage_full_support_states,64,all three actions in equilibrium
+stage_two_action_support_states,36,exactly two actions in equilibrium
+exploitability_uniform_pts_per_game,26.4986,exact best response DP
+exploitability_myopic_pts_per_game,23.9799,stage-optimal recovers 9.5% of skill
+sim_games,20000,20k equilibrium self-play games
+tie_rate,0.0198,
+comeback_rate,0.2261,
+num_support_mean,1.95,
+act_support_mean,2.241,
+myopic_flip_num,0.4375,
+myopic_flip_act,0.0836,
+num_gap_mean,0.025,
+num_gap_frac_flat,0.916,gap < 0.05 pts
+num_gap_frac_decisive,0.012,gap > 0.5 pts
+act_gap_mean,0.442,
+act_gap_frac_flat,0.923,gap < 0.05 pts
+act_gap_frac_decisive,0.075,gap > 0.5 pts
+ssr_overall,0.0926,"strict strategic sacrifices, non-forced action decisions"
+ssr_round9,0.3323,
+sacrifice_mean_immediate_cost_pts,3.5858,
+sacrifice_mean_final_gain_pts,4.3874,
+mono_type_round9_equilibrium,0.3058,random-order exact baseline: 0.2667
+mono_type_round9_myopic,0.6042,
