@@ -64,10 +64,6 @@ g++ -O3 -o simple_oracle simple_oracle.cpp
 
 The solver writes value tables of about 243 MB each to the working folder. Sampling uses fixed seeds, so a rerun gives the same items. The other commands in the file (stage, hr, depth, sims, brU, brM and brE) print the numbers behind the remaining tables in the report.
 
-## How it was built
-
-Fortune Fight and its rules are by Dingying Liu. The solver, the checks and the data were built with [Claude Code](https://claude.com/claude-code). A public preview is also on [Kaggle](https://www.kaggle.com/datasets/dingyingliu/novel-strategic-games-benchmark-public-preview).
-
 ## Citation and licence
 
 Please cite this repository with [CITATION.cff](CITATION.cff). The code and data are released under the [MIT License](LICENSE).
