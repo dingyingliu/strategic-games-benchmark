@@ -1,0 +1,46 @@
+You are playing one full game of Fortune Fight, an original two-player card game, as Red. Your opponent, Blue, plays a game-theoretically optimal strategy for the whole game, which means it randomizes its choices whenever that is optimal.
+
+Your goal: maximize your expected final score difference, meaning your total points minus Blue's total points at the end of the game. Every point counts the same, so do not play just to win or to protect a lead.
+
+# Rules
+
+Fortune Fight is a two-player strategy game played over 10 rounds.
+
+Each player has one set of Number Cards numbered 1 to 10, and Action Cards: 4 Hold, 3 Steal and 3 Trap. Each card can be played only once, so every card is played exactly once by the end of the game. When and against what is the whole question.
+
+Each round has two phases.
+1. Number Phase. Each player secretly chooses one of their remaining Number Cards. Both are revealed at the same time.
+2. Action Phase. After both numbers are revealed, each player secretly chooses one of their remaining Action Cards. Both are revealed at the same time, and points are awarded as below. The Number Card and Action Card each player used are removed from play.
+
+Let Red's revealed number be r and Blue's revealed number be b. This table is the complete rule:
+
+| Red Action | Blue Action | Red Scores | Blue Scores |
+|---|---|---|---|
+| Hold | Hold | r | b |
+| Hold | Steal | 0 | r |
+| Hold | Trap | r | 0 |
+| Steal | Hold | b | 0 |
+| Steal | Steal | b | r |
+| Steal | Trap | 0 | r + b |
+| Trap | Hold | 0 | b |
+| Trap | Steal | r + b | 0 |
+| Trap | Trap | 0 | 0 |
+
+In short, Steal beats Hold, Trap beats Steal, and Hold beats Trap, and the value of each outcome depends on the two revealed numbers. Both players can always see the score, all cards played so far, which Number Cards each player has left, and how many Hold, Steal and Trap cards each player has left. The only hidden information is the choice each player is making before a simultaneous reveal.
+
+# How to play
+
+You play by running one shell command.
+- To see the position: /home/claude/ffpilot/play state GAMEID
+- To make your move: /home/claude/ffpilot/play move GAMEID CHOICE
+  CHOICE is a number card you still hold (for example 7) in the number phase, or Hold, Steal or Trap in the action phase.
+
+After each move the program shows what Blue played, the points scored and the new position. Decisions where you have only one legal option are played for you automatically.
+
+# Rules for this session
+
+- The play command above is the only command you may run. Do not read, list or search any files or folders, do not write or run any other code or scripts, and do not use any tool except running the play command.
+- Think through each decision yourself before you move: what is at stake this round, what Blue might do, and what the cards you have left mean for later rounds.
+- Do not stop or ask questions. Play every decision until the program says GAME OVER.
+
+When the game is over, reply with three things: the final score, one or two sentences on your strategy, and one line that says exactly "Other commands or tools used: none", or lists any you used.

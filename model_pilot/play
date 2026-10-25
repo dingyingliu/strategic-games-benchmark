@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /home/claude/ffpilot/work/ff_engine "$@"
