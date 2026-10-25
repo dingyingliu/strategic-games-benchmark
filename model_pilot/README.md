@@ -41,12 +41,13 @@ The planner losses in horizon_results.csv (2.73, 1.51 and 1.15) come from the fi
 | G-fable51-1 | claude-fable-5-1 | 2026 | 0.177 | 0.177 | 0.000 | 16 of 18 | 38 to 30 | yes | 179,582 | 38.8 |
 | G-fable51-3 | claude-fable-5-1 | 2028 | 0.254 | 0.254 | 0.000 | 14 of 18 | 35 to 30 | yes | 192,297 | 44.0 |
 | G-opus55-1 | claude-opus-5-5 | 2026 | 0.750 | 0.750 | 0.000 | 13 of 18 | 32 to 30 | yes | 345,491 | 47.0 |
+| G-opus55-2 | claude-opus-5-5 | 2027 | 1.518 | 1.518 | 0.000 | 13 of 18 | 49 to 27 | yes | 336,105 | 47.1 |
 | G-opus55-3 | claude-opus-5-5 | 2028 | 0.487 | 0.487 | 0.000 | 13 of 18 | 42 to 41 | yes | 255,527 | 36.9 |
 
 | Model | Games | Points lost in each game | Mean points lost per game | Number phase | Action phase | Number choices optimal | Action choices optimal |
 |---|---|---|---|---|---|---|---|
 | Fable 5.1 | 2 | 0.177, 0.254 | 0.215 | 0.215 | 0.000 | 12 of 18 | 18 of 18 |
-| Opus 5.5 | 2 | 0.750, 0.487 | 0.619 | 0.619 | 0.000 | 8 of 18 | 18 of 18 |
+| Opus 5.5 | 3 | 0.750, 1.518, 0.487 | 0.918 | 0.918 | 0.000 | 12 of 27 | 27 of 27 |
 <!-- results end -->
 
 So far every action choice has been optimal, and all of the points lost came from which number card to play in which round. The other games are being played.
