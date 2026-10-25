@@ -81,6 +81,7 @@ Three games per model are enough to show these patterns, not to rank the models 
 | [score_games.py](score_games.py) | Scores a game from its log |
 | [record_agent.py](record_agent.py) | Writes the audit record of a game from the agent's transcript |
 | [make_results.py](make_results.py) | Builds results.csv and the results table |
+| [analysis.py](analysis.py) | Reproduces the numbers in the findings |
 | [ff_baseline.cpp](ff_baseline.cpp) | Reference players, scored the same way |
 | [reference_players.csv](reference_players.csv) | Reference player results |
 | [results.csv](results.csv) | One row per finished game |
@@ -96,7 +97,9 @@ g++ -O3 -o ff_engine ff_engine.cpp
 g++ -O3 -o ff_baseline ff_baseline.cpp
 ./ff_engine new G-example 2026 opus            # sets up a game
 ./ff_baseline depth3 20000 20261029            # one reference player
+mkdir -p pergame && ./ff_baseline depth3 20000 20261029 pergame/depth3.csv   # also writes the loss of every game
 python3 make_results.py                        # results from games
+PERGAME_DIR=pergame python3 analysis.py        # numbers in the findings
 ```
 
 The programs use absolute paths from the machine the pilot ran on, so change the paths in ff_engine.cpp, ff_baseline.cpp and play before rebuilding.

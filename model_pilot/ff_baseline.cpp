@@ -8,6 +8,7 @@
 //   ff_baseline eq GAMES SEED        Red samples the exact equilibrium (pipeline check: regret must be 0)
 //   ff_baseline depthD GAMES SEED    Red samples the equilibrium of a D-round lookahead (D = 1, 2, 3), the
 //                                    planners in the repo's horizon_results.csv; depth D reads simpleV_d(D-1).bin
+//   An optional fourth argument names a CSV file that receives the loss of every game.
 #define main oracle_main_unused
 #include "/home/claude/strategic-games-benchmark/simple_oracle.cpp"
 #undef main
@@ -67,6 +68,12 @@ int main(int argc, char** argv) {
             ar -= POW5[det.availR[p]]; ab -= POW5[det.availB[q]];
         }
         reg.push_back(RN + RA); regN.push_back(RN); regA.push_back(RA); diff.push_back(sR - sB);
+    }
+    if (argc > 4) {   // optional: write the loss of every game to a CSV file
+        FILE* f = fopen(argv[4], "w");
+        fprintf(f, "game,points_lost,number_phase,action_phase,final_score_difference\n");
+        for (int g = 0; g < games; g++) fprintf(f, "%d,%.8f,%.8f,%.8f,%.0f\n", g + 1, reg[g], regN[g], regA[g], diff[g]);
+        fclose(f);
     }
     printf("{\"policy\": \"%s\", \"games\": %d, \"seed\": %llu, ", mode.c_str(), games, (unsigned long long)seed);
     stats("points_lost_sum_of_regret", reg); printf(", ");
