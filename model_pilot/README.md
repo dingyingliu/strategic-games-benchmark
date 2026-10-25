@@ -45,6 +45,7 @@ The planner losses in horizon_results.csv (2.73, 1.51 and 1.15) come from the fi
 | G-opus55-2 | claude-opus-5-5 | 2027 | 1.518 | 1.518 | 0.000 | 13 of 18 | 49 to 27 | yes | 336,105 | 47.1 |
 | G-opus55-3 | claude-opus-5-5 | 2028 | 0.487 | 0.487 | 0.000 | 13 of 18 | 42 to 41 | yes | 255,527 | 36.9 |
 | G-opus55-4 | claude-opus-5-5 | 2029 | 0.969 | 0.969 | 0.000 | 12 of 16 | 39 to 24 | yes | 262,723 | 36.4 |
+| G-opus55-5 | claude-opus-5-5 | 2030 | 0.836 | 0.836 | 0.000 | 12 of 18 | 28 to 40 | yes | 317,578 | 43.0 |
 | G-sonnet55-1 | claude-sonnet-5-5 | 2026 | 0.183 | 0.183 | 0.000 | 13 of 18 | 46 to 49 | yes | 344,574 | 39.7 |
 | G-sonnet55-2 | claude-sonnet-5-5 | 2027 | 0.151 | 0.151 | 0.000 | 15 of 18 | 43 to 27 | yes | 583,792 | 66.0 |
 | G-sonnet55-3 | claude-sonnet-5-5 | 2028 | 1.294 | 1.294 | 0.000 | 10 of 18 | 24 to 33 | yes | 364,962 | 42.6 |
@@ -57,7 +58,7 @@ The planner losses in horizon_results.csv (2.73, 1.51 and 1.15) come from the fi
 | Model | Games | Points lost in each game | Mean points lost per game | Number phase | Action phase | Number choices optimal | Action choices optimal |
 |---|---|---|---|---|---|---|---|
 | Fable 5.1 | 3 | 0.177, 0.376, 0.254 | 0.269 | 0.269 | 0.000 | 18 of 27 | 25 of 25 |
-| Opus 5.5 | 4 | 0.750, 1.518, 0.487, 0.969 | 0.931 | 0.931 | 0.000 | 17 of 36 | 34 of 34 |
+| Opus 5.5 | 5 | 0.750, 1.518, 0.487, 0.969, 0.836 | 0.912 | 0.912 | 0.000 | 20 of 45 | 43 of 43 |
 | Sonnet 5.5 | 3 | 0.183, 0.151, 1.294 | 0.543 | 0.543 | 0.000 | 11 of 27 | 27 of 27 |
 | Haiku 5.5 | 5 | 1.957, 0.290, 1.510, 1.358, 0.894 | 1.202 | 1.202 | 0.000 | 18 of 45 | 45 of 45 |
 <!-- results end -->
