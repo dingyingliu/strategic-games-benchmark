@@ -50,13 +50,14 @@ The planner losses in horizon_results.csv (2.73, 1.51 and 1.15) come from the fi
 | G-haiku55-1 | claude-haiku-5-5 | 2026 | 1.957 | 1.957 | 0.000 | 13 of 18 | 58 to 22 | yes | 305,345 | 21.6 |
 | G-haiku55-2 | claude-haiku-5-5 | 2027 | 0.290 | 0.290 | 0.000 | 13 of 18 | 39 to 28 | yes | 179,290 | 13.6 |
 | G-haiku55-3 | claude-haiku-5-5 | 2028 | 1.510 | 1.510 | 0.000 | 11 of 18 | 31 to 47 | yes | 276,415 | 19.3 |
+| G-haiku55-5 | claude-haiku-5-5 | 2030 | 0.894 | 0.894 | 0.000 | 11 of 18 | 17 to 38 | yes | 190,922 | 13.5 |
 
 | Model | Games | Points lost in each game | Mean points lost per game | Number phase | Action phase | Number choices optimal | Action choices optimal |
 |---|---|---|---|---|---|---|---|
 | Fable 5.1 | 3 | 0.177, 0.376, 0.254 | 0.269 | 0.269 | 0.000 | 18 of 27 | 25 of 25 |
 | Opus 5.5 | 3 | 0.750, 1.518, 0.487 | 0.918 | 0.918 | 0.000 | 12 of 27 | 27 of 27 |
 | Sonnet 5.5 | 3 | 0.183, 0.151, 1.294 | 0.543 | 0.543 | 0.000 | 11 of 27 | 27 of 27 |
-| Haiku 5.5 | 3 | 1.957, 0.290, 1.510 | 1.252 | 1.252 | 0.000 | 10 of 27 | 27 of 27 |
+| Haiku 5.5 | 4 | 1.957, 0.290, 1.510, 0.894 | 1.163 | 1.163 | 0.000 | 12 of 36 | 36 of 36 |
 <!-- results end -->
 
 In all twelve games the agent ran only the play command for its own game.
