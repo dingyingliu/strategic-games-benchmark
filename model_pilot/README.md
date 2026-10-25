@@ -1,8 +1,8 @@
 # Model pilot
 
-Claude models play complete games of Fortune Fight as Red against Blue, which plays the exact equilibrium from [simple_oracle.cpp](../simple_oracle.cpp). The solver prices every decision the models make, so each game gives an exact count of the points their play gave up. This folder holds the game program, the instructions the models received, every logged decision and the scores. Games are added as they finish.
+Claude models play complete games of Fortune Fight as Red against Blue, which plays the exact equilibrium from [simple_oracle.cpp](../simple_oracle.cpp). The solver prices every decision the models make, so each game gives an exact count of the points their play gave up. This folder holds the game program, the instructions the models received, every logged decision and the scores.
 
-The models are Fable 5.1, Opus 5.5, Sonnet 5.5 and Haiku 5.5, with three games each on the same three seeds. The results table gives the exact model ID that each agent's transcript reports.
+The models are Fable 5.1, Opus 5.5, Sonnet 5.5 and Haiku 5.5, with three games each on the same three seeds, twelve games in all. The results table gives the exact model ID that each agent's transcript reports.
 
 ## How a game is run
 
@@ -33,7 +33,7 @@ These fixed players are scored in the same way, 20,000 games each against the sa
 
 The planner losses in horizon_results.csv (2.73, 1.51 and 1.15) come from the final scores of 3,000 games, which carry a standard error of about 0.39 points, and they agree with these within that error. [reference_players.csv](reference_players.csv) has the full results, including the spread of the loss per game.
 
-## Results so far
+## Results
 
 <!-- results start -->
 | Game | Model | Seed | Points lost | Number phase | Action phase | Optimal choices | Final score | Only the play command | Output tokens | Minutes |
@@ -45,6 +45,7 @@ The planner losses in horizon_results.csv (2.73, 1.51 and 1.15) come from the fi
 | G-opus55-2 | claude-opus-5-5 | 2027 | 1.518 | 1.518 | 0.000 | 13 of 18 | 49 to 27 | yes | 336,105 | 47.1 |
 | G-opus55-3 | claude-opus-5-5 | 2028 | 0.487 | 0.487 | 0.000 | 13 of 18 | 42 to 41 | yes | 255,527 | 36.9 |
 | G-sonnet55-1 | claude-sonnet-5-5 | 2026 | 0.183 | 0.183 | 0.000 | 13 of 18 | 46 to 49 | yes | 344,574 | 39.7 |
+| G-sonnet55-2 | claude-sonnet-5-5 | 2027 | 0.151 | 0.151 | 0.000 | 15 of 18 | 43 to 27 | yes | 583,792 | 66.0 |
 | G-sonnet55-3 | claude-sonnet-5-5 | 2028 | 1.294 | 1.294 | 0.000 | 10 of 18 | 24 to 33 | yes | 364,962 | 42.6 |
 | G-haiku55-1 | claude-haiku-5-5 | 2026 | 1.957 | 1.957 | 0.000 | 13 of 18 | 58 to 22 | yes | 305,345 | 21.6 |
 | G-haiku55-2 | claude-haiku-5-5 | 2027 | 0.290 | 0.290 | 0.000 | 13 of 18 | 39 to 28 | yes | 179,290 | 13.6 |
@@ -54,11 +55,19 @@ The planner losses in horizon_results.csv (2.73, 1.51 and 1.15) come from the fi
 |---|---|---|---|---|---|---|---|
 | Fable 5.1 | 3 | 0.177, 0.376, 0.254 | 0.269 | 0.269 | 0.000 | 18 of 27 | 25 of 25 |
 | Opus 5.5 | 3 | 0.750, 1.518, 0.487 | 0.918 | 0.918 | 0.000 | 12 of 27 | 27 of 27 |
-| Sonnet 5.5 | 2 | 0.183, 1.294 | 0.739 | 0.739 | 0.000 | 5 of 18 | 18 of 18 |
+| Sonnet 5.5 | 3 | 0.183, 0.151, 1.294 | 0.543 | 0.543 | 0.000 | 11 of 27 | 27 of 27 |
 | Haiku 5.5 | 3 | 1.957, 0.290, 1.510 | 1.252 | 1.252 | 0.000 | 10 of 27 | 27 of 27 |
 <!-- results end -->
 
-So far every action choice has been optimal, and all of the points lost came from which number card to play in which round. The other games are being played.
+In all twelve games the agent ran only the play command for its own game.
+
+- **Every action choice was optimal.** All 106 action choices across the four models had zero regret. All of the points lost came from the number cards, meaning which card to play in which round. 51 of the 108 number choices were optimal.
+- **The number-card losses sit in the middle of the game.** Rounds 1 to 6 hold 76% of them, with the peak in rounds 5 and 6. Several agents said they solved the game exactly from round 7 on, once few enough cards were left to work backward by hand.
+- **Fable 5.1 lost the least**, 0.27 points per game. A three-round planner's average over three games is that low only 3% of the time. Sonnet 5.5 (0.54), Opus 5.5 (0.92) and Haiku 5.5 (1.25) fall within the range of the planners. Each Fable game lost less than each Opus game, which would happen 1 time in 20 if the two played equally well. The other gaps between models are within what three games can show.
+- **Final scores say little about play.** Across the twelve games, a bigger win did not go with fewer points lost (correlation 0.24). Haiku's 36-point win was its worst-played game.
+- **The agents did not see where they lost points.** None of the twelve final replies names a number-card choice as a mistake. Two blame the score on action choices that the solver scores as optimal.
+
+Three games per model are enough to show these patterns, not to rank the models closely.
 
 [results.csv](results.csv) has one row per game, including the largest mistakes. Each folder in [games](games) holds the game's log (every Red decision with the value of every option, both equilibrium mixes, the choice, its regret and Blue's choice), its final state and the agent record.
 
