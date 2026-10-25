@@ -39,6 +39,7 @@ The planner losses in horizon_results.csv (2.73, 1.51 and 1.15) come from the fi
 | Game | Model | Seed | Points lost | Number phase | Action phase | Optimal choices | Final score | Only the play command | Output tokens | Minutes |
 |---|---|---|---|---|---|---|---|---|---|---|
 | G-fable51-1 | claude-fable-5-1 | 2026 | 0.177 | 0.177 | 0.000 | 16 of 18 | 38 to 30 | yes | 179,582 | 38.8 |
+| G-fable51-2 | claude-fable-5-1 | 2027 | 0.376 | 0.376 | 0.000 | 13 of 16 | 38 to 40 | yes | 255,344 | 53.5 |
 | G-fable51-3 | claude-fable-5-1 | 2028 | 0.254 | 0.254 | 0.000 | 14 of 18 | 35 to 30 | yes | 192,297 | 44.0 |
 | G-opus55-1 | claude-opus-5-5 | 2026 | 0.750 | 0.750 | 0.000 | 13 of 18 | 32 to 30 | yes | 345,491 | 47.0 |
 | G-opus55-2 | claude-opus-5-5 | 2027 | 1.518 | 1.518 | 0.000 | 13 of 18 | 49 to 27 | yes | 336,105 | 47.1 |
@@ -47,7 +48,7 @@ The planner losses in horizon_results.csv (2.73, 1.51 and 1.15) come from the fi
 
 | Model | Games | Points lost in each game | Mean points lost per game | Number phase | Action phase | Number choices optimal | Action choices optimal |
 |---|---|---|---|---|---|---|---|
-| Fable 5.1 | 2 | 0.177, 0.254 | 0.215 | 0.215 | 0.000 | 12 of 18 | 18 of 18 |
+| Fable 5.1 | 3 | 0.177, 0.376, 0.254 | 0.269 | 0.269 | 0.000 | 18 of 27 | 25 of 25 |
 | Opus 5.5 | 3 | 0.750, 1.518, 0.487 | 0.918 | 0.918 | 0.000 | 12 of 27 | 27 of 27 |
 | Haiku 5.5 | 1 | 0.290 | 0.290 | 0.290 | 0.000 | 4 of 9 | 9 of 9 |
 <!-- results end -->

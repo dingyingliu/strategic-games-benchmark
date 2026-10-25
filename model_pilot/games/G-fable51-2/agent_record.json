@@ -1,0 +1,42 @@
+{
+ "game": "G-fable51-2",
+ "model_ids_reported": {
+  "claude-fable-5-1": 38
+ },
+ "instructions_identical_to_agent_prompt": true,
+ "commands": [
+  "/home/claude/ffpilot/play state G-fable51-2",
+  "/home/claude/ffpilot/play move G-fable51-2 10",
+  "/home/claude/ffpilot/play move G-fable51-2 Trap",
+  "/home/claude/ffpilot/play move G-fable51-2 9",
+  "/home/claude/ffpilot/play move G-fable51-2 Trap",
+  "/home/claude/ffpilot/play move G-fable51-2 8",
+  "/home/claude/ffpilot/play move G-fable51-2 Hold",
+  "/home/claude/ffpilot/play move G-fable51-2 7",
+  "/home/claude/ffpilot/play move G-fable51-2 Steal",
+  "/home/claude/ffpilot/play move G-fable51-2 6",
+  "/home/claude/ffpilot/play move G-fable51-2 Trap",
+  "/home/claude/ffpilot/play move G-fable51-2 5",
+  "/home/claude/ffpilot/play move G-fable51-2 Steal",
+  "/home/claude/ffpilot/play move G-fable51-2 1",
+  "/home/claude/ffpilot/play move G-fable51-2 Steal",
+  "/home/claude/ffpilot/play move G-fable51-2 3",
+  "/home/claude/ffpilot/play move G-fable51-2 4"
+ ],
+ "play_commands": 17,
+ "other_commands": [],
+ "tools_used": {
+  "Bash": 17
+ },
+ "only_play_commands_for_this_game": true,
+ "final_reply": "Final score: Red (me) 38, Blue 40 (lost by 2).\n\nStrategy: I treated each action phase as a rock-paper-scissors stage game with payoffs set by the two revealed numbers, playing only actions in the equilibrium support (Hold/Trap when my number was much bigger, Hold/Steal when much smaller, anything when close) and adjusting for card inventories, which is how I led 20-2 after three rounds; I front-loaded my big numbers while I still held Traps, used my last Trap in round 5 on the 6-vs-10 round (which Blue answered with Hold), and then with no Traps left I was structurally down for the final four rounds, where I worked out the small endgame trees by hand and kept the loss to the coin-flip minimum (expected -6.5 over the last two forced rounds, realised -6).\n\nOther commands or tools used: none",
+ "usage_tokens": {
+  "input_tokens": 38,
+  "cache_creation_input_tokens": 740669,
+  "cache_read_input_tokens": 2536260,
+  "output_tokens": 255344
+ },
+ "start_utc": "2026-10-25T03:36:50.737Z",
+ "end_utc": "2026-10-25T04:30:18.497Z",
+ "minutes": 53.5
+}
