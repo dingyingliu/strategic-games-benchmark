@@ -1,0 +1,43 @@
+{
+ "game": "G-fable51-4",
+ "model_ids_reported": {
+  "claude-fable-5-1": 38
+ },
+ "instructions_identical_to_agent_prompt": true,
+ "commands": [
+  "/home/claude/ffpilot/play state G-fable51-4",
+  "/home/claude/ffpilot/play move G-fable51-4 8",
+  "/home/claude/ffpilot/play move G-fable51-4 Trap",
+  "/home/claude/ffpilot/play move G-fable51-4 10",
+  "/home/claude/ffpilot/play move G-fable51-4 Trap",
+  "/home/claude/ffpilot/play move G-fable51-4 9",
+  "/home/claude/ffpilot/play move G-fable51-4 Hold",
+  "/home/claude/ffpilot/play move G-fable51-4 7",
+  "/home/claude/ffpilot/play move G-fable51-4 Hold",
+  "/home/claude/ffpilot/play move G-fable51-4 1",
+  "/home/claude/ffpilot/play move G-fable51-4 Steal",
+  "/home/claude/ffpilot/play move G-fable51-4 3",
+  "/home/claude/ffpilot/play move G-fable51-4 Trap",
+  "/home/claude/ffpilot/play move G-fable51-4 5",
+  "/home/claude/ffpilot/play move G-fable51-4 Steal",
+  "/home/claude/ffpilot/play move G-fable51-4 2",
+  "/home/claude/ffpilot/play move G-fable51-4 Steal",
+  "/home/claude/ffpilot/play move G-fable51-4 6"
+ ],
+ "play_commands": 18,
+ "other_commands": [],
+ "tools_used": {
+  "Bash": 18
+ },
+ "only_play_commands_for_this_game": true,
+ "final_reply": "Final score: Red (me) 29, Blue 54 — a loss by 25 points.\n\nStrategy: I played each round as a zero-sum matrix game on the score difference, using the one-shot equilibrium mixes (Hold/Steal/Trap weighted by the revealed numbers) early and then explicit backward-induction continuation values once the inventories shrank (Blue's Steals ran out after round 4, leaving a Steal-vs-Trap hide-and-seek). An early Trap caught Blue's Steal for +19, but Blue's Steals then took my 9 and 7, and in the endgame Blue's Traps landed on all three of my remaining Steals (rounds 5, 7, 8) — in each of those spots the two actions were near-indifferent by my computed equilibrium values and the coin flips went Blue's way.\n\nOther commands or tools used: none",
+ "usage_tokens": {
+  "input_tokens": 38,
+  "cache_creation_input_tokens": 822386,
+  "cache_read_input_tokens": 2879954,
+  "output_tokens": 225402
+ },
+ "start_utc": "2026-10-25T06:50:52.473Z",
+ "end_utc": "2026-10-25T07:43:54.756Z",
+ "minutes": 53.0
+}
