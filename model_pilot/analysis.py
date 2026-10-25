@@ -6,7 +6,7 @@ using the seeds in reference_players.csv. Point PERGAME_DIR at the folder that h
 
 usage: PERGAME_DIR=pergame python3 analysis.py
 """
-import csv, json, glob, os, random, statistics, itertools, collections
+import csv, json, glob, os, random, statistics, itertools, collections  # noqa: E401
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PERGAME = os.environ.get('PERGAME_DIR', os.path.join(HERE, 'pergame'))
@@ -39,11 +39,12 @@ for p in ('uniform', 'depth1', 'depth2', 'depth3'):
 rng = random.Random(7)
 for mid, rs in sorted(by.items(), key=lambda kv: statistics.mean(float(r['points_lost']) for r in kv[1])):
     m = statistics.mean(float(r['points_lost']) for r in rs)
-    line = '%s mean points lost %.3f' % (mid, m)
+    k = len(rs)
+    line = '%s mean points lost %.3f over %d games' % (mid, m, k)
     for p, L in ref.items():
         n = 200000
-        hit = sum(1 for _ in range(n) if sum(L[rng.randrange(len(L))] for _ in range(3)) / 3 <= m)
-        line += ', %s three-game mean this low %.1f%%' % (p, 100 * hit / n)
+        hit = sum(1 for _ in range(n) if sum(L[rng.randrange(len(L))] for _ in range(k)) / k <= m)
+        line += ', %s %d-game mean this low %.1f%%' % (p, k, 100 * hit / n)
     print(line)
 
 # exact permutation test between each pair of models (difference in mean points lost, one-sided)
@@ -64,3 +65,39 @@ for a, b in itertools.combinations(sorted(by), 2):
 fs = [int(r['final_score_red']) - int(r['final_score_blue']) for r in rows]
 pl = [float(r['points_lost']) for r in rows]
 print('correlation of final score difference with points lost %.2f' % statistics.correlation(fs, pl))
+
+# where the points were lost, and the action choices that were not optimal
+logs = {os.path.basename(os.path.dirname(f)): [json.loads(l) for l in open(f)]
+        for f in glob.glob(os.path.join(HERE, 'games', 'G-*', 'log.jsonl'))}
+total = sum(d['regret'] for log in logs.values() for d in log)
+act = [(g, d['round'], d['choice'], round(d['regret'], 3)) for g, log in sorted(logs.items())
+       for d in log if d['phase'] == 'action' and d['regret'] > 1e-6]
+print('points lost in all games %.3f, of which action choices %.3f' % (total, sum(a[3] for a in act)))
+print('action choices that were not optimal: %s' % act)
+
+# number-card patterns
+opening = collections.Counter(log[0]['choice'] for log in logs.values())
+print('round 1 opening cards: %s' % dict(sorted(opening.items())))
+highest = []
+lost_on_highest = lost_number = 0.0
+for g, log in sorted(logs.items()):
+    nums = [d for d in log if d['phase'] == 'number']
+    if sum(d['choice'] == max(d['options']) for d in nums[:5]) >= 4:
+        highest.append(g)
+    lost_on_highest += sum(d['regret'] for d in nums if d['choice'] == max(d['options']))
+    lost_number += sum(d['regret'] for d in nums)
+print('games that played the highest card in hand in at least 4 of the first 5 rounds: %d %s' % (len(highest), highest))
+print('share of number-card loss from playing the highest card in hand %.0f%%' % (100 * lost_on_highest / lost_number))
+direction = collections.defaultdict(collections.Counter)
+for g, log in logs.items():
+    model = g.split('-')[1]
+    for d in log:
+        if d['phase'] != 'number' or d['regret'] < 1e-6:
+            continue
+        top = max(d['option_evs'])
+        best = [o for o, e in zip(d['options'], d['option_evs']) if e > top - 1e-6]
+        side = 'higher' if d['choice'] > max(best) else 'lower' if d['choice'] < min(best) else 'between'
+        direction[model][side] += 1
+for model, c in sorted(direction.items()):
+    print('%s costly number choices, card higher than every best card %d, lower %d, between %d' % (
+        model, c['higher'], c['lower'], c['between']))

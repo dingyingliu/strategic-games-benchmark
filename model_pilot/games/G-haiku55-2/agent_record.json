@@ -32,6 +32,10 @@
  },
  "only_play_commands_for_this_game": true,
  "final_reply": "Final score: Red 39, Blue 28 (Red ahead by 11).\n\nStrategy: I lost 13 points in rounds 1 and 2 by playing Hold on mid and high numbers, and Blue answered with Steal both times. From round 3 on I picked numbers and actions from one-shot mixed-equilibrium estimates adjusted for remaining card counts, which let Hold score in rounds 3 and 4 against Blue's Traps and kept Steal in reserve; in the endgame, once Blue had only Hold left, I stole against its higher revealed number and trapped against its lower one.\n\nOther commands or tools used: none",
+ "interruptions": {
+  "reply_over_output_cap_then_resumed": 1
+ },
+ "organizer_messages": [],
  "usage_tokens": {
   "input_tokens": 42,
   "cache_creation_input_tokens": 209172,

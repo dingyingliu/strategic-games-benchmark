@@ -32,6 +32,10 @@
  },
  "only_play_commands_for_this_game": true,
  "final_reply": "Final score: Red (me) 24, Blue 33. I lost by 9.\n\nStrategy: I treated the early rounds as near-indifferent between actions, choosing by which cards to keep for later and varying my number cards. From round 7 on I solved the endgame exactly. I picked the action mixes from the exact value of the 2-round endgame, and in round 8 I played Hold, which was one of my equilibrium actions. Blue answered Steal and took 9 points. That swung a 7-point lead into a 2-point deficit, and the exact analysis then put the remaining game at about -3.7 for me.\n\nOther commands or tools used: none",
+ "interruptions": {
+  "reply_over_output_cap_then_resumed": 2
+ },
+ "organizer_messages": [],
  "usage_tokens": {
   "input_tokens": 44,
   "cache_creation_input_tokens": 475007,

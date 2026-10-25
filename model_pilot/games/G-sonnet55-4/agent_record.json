@@ -31,6 +31,11 @@
  },
  "only_play_commands_for_this_game": true,
  "final_reply": "(a) Final score: Red (me) 52, Blue 38. I won by 14.\n\n(b) Strategy: I built an early lead with Hold and Trap when Blue's Steals were exposed. I put the Hold with my 9 (9 vs 6, both Held, scored 9-6). From round 7 I solved the endgame as a simultaneous game. Blue had only Hold/Trap, so my last Steals were weak against its Traps. I tried to hold the expected loss to about 14 points. The result was about -12 over rounds 7-10, which kept most of the lead.\n\n(c) Other commands or tools used: none",
+ "interruptions": {
+  "reply_over_output_cap_then_resumed": 2,
+  "context_compressed": 1
+ },
+ "organizer_messages": [],
  "usage_tokens": {
   "input_tokens": 42,
   "cache_creation_input_tokens": 990651,

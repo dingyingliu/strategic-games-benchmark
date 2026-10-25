@@ -32,6 +32,11 @@
  },
  "only_play_commands_for_this_game": true,
  "final_reply": "Final score: Red (me) 43, Blue 27. I won by 16.\n\nStrategy: Early on I chose numbers and actions by approximate equilibrium play, adjusted for how scarce each action card was. After Blue spent its last Trap, my Steal could no longer be punished. From round 7 on I solved the remaining game by working backward from the last round. That meant using my lowest number with Hold or Steal, saving 8 and 10 for Trap, and mixing Hold and Trap in the rounds where Blue's single remaining Hold made timing a guess. Round 7 played 1 and Steal (+8 against Blue's 8). Round 8 played 8 and Trap (+12). In round 9, Blue's Hold beat my Trap (0 to 3), and the forced round 10 gave Blue 2.\n\nOther commands or tools used: none",
+ "interruptions": {
+  "reply_over_output_cap_then_resumed": 3,
+  "context_compressed": 1
+ },
+ "organizer_messages": [],
  "usage_tokens": {
   "input_tokens": 46,
   "cache_creation_input_tokens": 1082983,

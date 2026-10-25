@@ -16,6 +16,21 @@ NAMES = {'claude-fable-5-1': 'Fable 5.1', 'claude-opus-5-5': 'Opus 5.5',
          'claude-sonnet-5-5': 'Sonnet 5.5', 'claude-haiku-5-5': 'Haiku 5.5'}
 order = lambda mid: list(NAMES).index(mid) if mid in NAMES else len(NAMES)
 
+
+def interruption_text(i):
+    """Short text for the interruptions in an agent record (see record_agent.py)."""
+    parts = []
+    if i.get('reply_over_output_cap_then_resumed'):
+        parts.append('cap %d' % i['reply_over_output_cap_then_resumed'])
+    if i.get('context_compressed'):
+        parts.append('compressed %d' % i['context_compressed'])
+    stopped = sum(v for k, v in i.items() if k.startswith('agent_stopped_by_error'))
+    if stopped:
+        parts.append('stopped %d' % stopped)
+    if i.get('organizer_message'):
+        parts.append('organizer %d' % i['organizer_message'])
+    return ', '.join(parts) or 'none'
+
 rows = []
 for d in glob.glob(os.path.join(GAMES, 'G-*')):
     game = os.path.basename(d)
@@ -44,6 +59,7 @@ for d in glob.glob(os.path.join(GAMES, 'G-*')):
         'instructions_identical_to_agent_prompt': rec['instructions_identical_to_agent_prompt'],
         'output_tokens': rec['usage_tokens'].get('output_tokens'),
         'minutes': rec['minutes'],
+        'interruptions': interruption_text(rec.get('interruptions', {})),
         'largest_mistakes': json.dumps(s.get('largest_mistakes', [])),
     })
 rows.sort(key=lambda r: (order(r['model_id']), r['game']))
@@ -53,14 +69,14 @@ with open(os.path.join(HERE, 'results.csv'), 'w', newline='') as f:
     w.writeheader()
     w.writerows(rows)
 
-out = ['| Game | Model | Seed | Points lost | Number phase | Action phase | Optimal choices | Final score | Only the play command | Output tokens | Minutes |',
-       '|---|---|---|---|---|---|---|---|---|---|---|']
+out = ['| Game | Model | Seed | Points lost | Number phase | Action phase | Optimal choices | Final score | Only the play command | Interruptions | Output tokens | Minutes |',
+       '|---|---|---|---|---|---|---|---|---|---|---|---|']
 for r in rows:
-    out.append('| %s | %s | %s | %.3f | %.3f | %.3f | %d of %d | %d to %d | %s | %s | %s |' % (
+    out.append('| %s | %s | %s | %.3f | %.3f | %.3f | %d of %d | %d to %d | %s | %s | %s | %s |' % (
         r['game'], r['model_id'], r['seed'], r['points_lost'], r['number_phase_points_lost'],
         r['action_phase_points_lost'], r['optimal_choices'], r['choices_made'], r['final_score_red'],
         r['final_score_blue'], 'yes' if r['only_play_commands_for_this_game'] else 'no',
-        '{:,}'.format(r['output_tokens']), r['minutes']))
+        r['interruptions'], '{:,}'.format(r['output_tokens']), r['minutes']))
 out += ['', '| Model | Games | Points lost in each game | Mean points lost per game | Number phase | Action phase | Number choices optimal | Action choices optimal |',
         '|---|---|---|---|---|---|---|---|']
 for mid in sorted({r['model_id'] for r in rows}, key=order):

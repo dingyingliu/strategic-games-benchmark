@@ -32,6 +32,10 @@
  },
  "only_play_commands_for_this_game": true,
  "final_reply": "Final score: Red 58, Blue 22 (difference +36). The game ended with GAME OVER.\n\nStrategy: In the early rounds I chose each action by mixing according to the stage-game equilibrium for the revealed numbers, adjusting for remaining Hold/Steal/Trap counts. For numbers I mostly played mid-high cards and avoided exposing my low cards to Blue's strong ones. From round 6 I tracked the card budgets closely, and in round 9 I solved the final two rounds exactly, mixing 50/50 between 1 and 7 and then about 53% Steal on the revealed pair.\n\nOther commands or tools used: none",
+ "interruptions": {
+  "reply_over_output_cap_then_resumed": 1
+ },
+ "organizer_messages": [],
  "usage_tokens": {
   "input_tokens": 42,
   "cache_creation_input_tokens": 355283,

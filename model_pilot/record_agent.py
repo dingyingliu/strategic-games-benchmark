@@ -3,7 +3,9 @@
 Run by the organizer after a game ends. The transcript itself stays private because it also holds
 account details. The record keeps what is needed to check the run: the exact model ID the transcript
 reports for every reply, every command the agent ran, any other tool it used, whether its
-instructions match agent_prompt.txt exactly, its final reply, token usage and timing.
+instructions match agent_prompt.txt exactly, its final reply, token usage and timing. It also counts
+interruptions from the agent tool (a reply that ran over the output cap and was resumed, a compressed
+context) and keeps verbatim any message the organizer sent during the game.
 
 usage: python3 record_agent.py TRANSCRIPT.jsonl GAME OUT.json
 """
@@ -20,6 +22,9 @@ def record(path, game):
     template = open(os.path.join(HERE, 'agent_prompt.txt')).read()
     models, tools, commands, usage, seen = Counter(), Counter(), [], Counter(), set()
     first_user, final_reply, times = None, None, []
+    # interruptions from the agent tool (a reply over the output cap, context compression) and any
+    # message the organizer sent during the game, which is kept verbatim
+    interruptions, organizer_messages = Counter(), []
     for line in open(path):
         try:
             m = json.loads(line)
@@ -28,12 +33,29 @@ def record(path, game):
         if m.get('timestamp'):
             times.append(m['timestamp'])
         msg = m.get('message') or {}
-        if m.get('type') == 'user' and first_user is None:
+        if m.get('type') == 'user':
             c = msg.get('content')
             if isinstance(c, list):
-                c = ''.join(x.get('text', '') for x in c if isinstance(x, dict))
-            first_user = c
+                if any(isinstance(x, dict) and x.get('type') == 'tool_result' for x in c):
+                    c = None
+                else:
+                    c = ''.join(x.get('text', '') for x in c if isinstance(x, dict))
+            if first_user is None:
+                first_user = c
+            elif isinstance(c, str):
+                if c.startswith('Output token limit hit'):
+                    interruptions['reply_over_output_cap_then_resumed'] += 1
+                elif c.startswith('This session is being continued from a previous conversation'):
+                    interruptions['context_compressed'] += 1
+                elif c.startswith('The coordinator sent a message while you were working:'):
+                    interruptions['organizer_message'] += 1
+                    organizer_messages.append(c.split('\n', 1)[1].strip() if '\n' in c else c)
         if m.get('type') != 'assistant':
+            continue
+        if msg.get('model') == '<synthetic>':
+            # an error the agent tool wrote into the transcript, not a model reply
+            if m.get('isApiErrorMessage'):
+                interruptions['agent_stopped_by_error:' + str(m.get('error'))] += 1
             continue
         if msg.get('model'):
             models[msg['model']] += 1
@@ -65,6 +87,8 @@ def record(path, game):
         'tools_used': dict(tools),
         'only_play_commands_for_this_game': not other and set(tools) <= {'Bash'},
         'final_reply': final_reply,
+        'interruptions': dict(interruptions),
+        'organizer_messages': organizer_messages,
         'usage_tokens': dict(usage),
         'start_utc': t[0] if t else None,
         'end_utc': t[-1] if t else None,
