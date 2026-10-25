@@ -101,3 +101,26 @@ for g, log in logs.items():
 for model, c in sorted(direction.items()):
     print('%s costly number choices, card higher than every best card %d, lower %d, between %d' % (
         model, c['higher'], c['lower'], c['between']))
+
+# rewarding each choice by whether its game was won, instead of by the choice's value
+margin = {r['game']: int(r['final_score_red']) - int(r['final_score_blue']) for r in rows}
+best_m, costly = [], []
+for g, log in logs.items():
+    for d in log:
+        if d['forced']:
+            continue
+        if d['regret'] < 1e-6:
+            best_m.append(margin[g])
+        else:
+            costly.append((margin[g], d['regret']))
+costly_m = [m for m, _ in costly]
+punished = sum(m < 0 for m in best_m)
+rewarded = sum(m > 0 for m in costly_m)
+print('win-based reward, best moves punished %d of %d (%.0f%%), costly choices rewarded %d of %d (%.0f%%)' % (
+    punished, len(best_m), 100 * punished / len(best_m), rewarded, len(costly_m), 100 * rewarded / len(costly_m)))
+print('share of points lost to costly choices that came in won games %.0f%%' % (
+    100 * sum(r for m, r in costly if m > 0) / sum(r for _, r in costly)))
+sign = lambda m: (m > 0) - (m < 0)
+p = sum(1.0 if sign(a) > sign(b) else 0.5 if sign(a) == sign(b) else 0.0
+        for a in best_m for b in costly_m) / (len(best_m) * len(costly_m))
+print('chance that a best move gets a higher win-based reward than a costly choice %.3f' % p)
