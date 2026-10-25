@@ -2,7 +2,7 @@
 
 Claude models play complete games of Fortune Fight as Red against Blue, which plays the exact equilibrium from [simple_oracle.cpp](../simple_oracle.cpp). The solver prices every decision the models make, so each game gives an exact count of the points their play gave up. This folder holds the game program, the instructions the models received, every logged decision and the scores. Games are added as they finish.
 
-The first models are Opus 5.5 (`claude-opus-5-5`) and Fable 5.1 (`claude-fable-5-1`), with three games each planned.
+The models are Fable 5.1, Opus 5.5, Sonnet 5.5 and Haiku 5.5, with three games each on the same three seeds. The results table gives the exact model ID that each agent's transcript reports.
 
 ## How a game is run
 
@@ -35,12 +35,20 @@ The planner losses in horizon_results.csv (2.73, 1.51 and 1.15) come from the fi
 
 ## Results so far
 
+<!-- results start -->
 | Game | Model | Seed | Points lost | Number phase | Action phase | Optimal choices | Final score | Only the play command | Output tokens | Minutes |
 |---|---|---|---|---|---|---|---|---|---|---|
 | G-fable51-1 | claude-fable-5-1 | 2026 | 0.177 | 0.177 | 0.000 | 16 of 18 | 38 to 30 | yes | 179,582 | 38.8 |
 | G-opus55-1 | claude-opus-5-5 | 2026 | 0.750 | 0.750 | 0.000 | 13 of 18 | 32 to 30 | yes | 345,491 | 47.0 |
+| G-opus55-3 | claude-opus-5-5 | 2028 | 0.487 | 0.487 | 0.000 | 13 of 18 | 42 to 41 | yes | 255,527 | 36.9 |
 
-In both games every action choice was optimal, and all of the points lost came from which number card to play in which round. Games 2 and 3 for each model are being played.
+| Model | Games | Points lost in each game | Mean points lost per game | Number phase | Action phase | Number choices optimal | Action choices optimal |
+|---|---|---|---|---|---|---|---|
+| Fable 5.1 | 1 | 0.177 | 0.177 | 0.177 | 0.000 | 7 of 9 | 9 of 9 |
+| Opus 5.5 | 2 | 0.750, 0.487 | 0.619 | 0.619 | 0.000 | 8 of 18 | 18 of 18 |
+<!-- results end -->
+
+So far every action choice has been optimal, and all of the points lost came from which number card to play in which round. The other games are being played.
 
 [results.csv](results.csv) has one row per game, including the largest mistakes. Each folder in [games](games) holds the game's log (every Red decision with the value of every option, both equilibrium mixes, the choice, its regret and Blue's choice), its final state and the agent record.
 
