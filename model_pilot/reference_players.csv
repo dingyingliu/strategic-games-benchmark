@@ -1,0 +1,6 @@
+player,policy_flag,games,seed,points_lost_per_game,standard_error,standard_deviation_per_game,number_phase,action_phase,share_games_no_number_loss,share_games_no_action_loss,loss_p10,loss_median,loss_p90,loss_from_final_scores,loss_from_final_scores_standard_error,final_score_difference_standard_deviation
+uniform random,uniform,20000,20261025,5.023,0.036,5.134,1.193,3.83,0.0004,0.3652,0.657,2.986,12.21,4.929,0.151,21.4
+one-round planner,depth1,20000,20261027,2.499,0.024,3.401,0.824,1.675,0.0169,0.6398,0.319,1.099,6.875,2.618,0.153,21.66
+two-round planner,depth2,20000,20261028,1.385,0.013,1.807,0.822,0.564,0.0003,0.8102,0.363,0.839,2.812,1.67,0.151,21.42
+three-round planner,depth3,20000,20261029,0.834,0.008,1.087,0.627,0.207,0.0001,0.8929,0.199,0.55,1.603,0.754,0.151,21.36
+equilibrium,eq,20000,20261026,0.0,0.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,0.068,0.151,21.35
